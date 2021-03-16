@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 const yargs = require("yargs");
-const axios = require("axios");
+const _ = require('lodash')
+
+const jokes = require('./jokes')
 
 const options = yargs
   .usage("Usage: chuck -n <name>")
@@ -15,9 +17,8 @@ const options = yargs
 
 console.log(`Here's a random Chuck Norris joke for you ${options.name}:`);
 
-const url = "http://api.icndb.com/jokes/random";
+console.log(_.sample(jokes))  
 
-axios.get(url, { headers: { Accept: "application/json" } })
-  .then(res => {
-    console.log(res.data.value.joke);
-  });
+// Potential extra challenge to rewrite functionality in vanilla JS, like:
+// console.log(jokes[Math.floor(Math.random()*(jokes.length-1))])
+
